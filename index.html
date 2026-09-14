@@ -1,6 +1,49 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8/">
-    </head>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width , initial-scale=1.0" />
+    <title>Pixora</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <div class="app">
+        <header class="topbar">
+            <div class="web">
+                <img src="Photos/Logo.png" alt="Logo" />
+                <h1 id="Pixora">Pixora</h1>
+                <p id="Theme">-Harvest Season</p>
+                <div class="btns">
+                    <button class="icon-btn" id="undo-btn" type="button" aria-label="undo last action">
+                        ↶
+
+                    </button>
+                    <button class="icon-btn" id="redo-btn" type="button" aria-label="Redo last action">
+                        ↷
+                    </button>
+
+                    <button class="primary-btn" id="export-btn" type="button">
+                        Export
+                    </button>
+                    <button class="theme-btn" id="light-dark-mood-btn" type="button" aria-label="Switch to light mood"
+                        aria-pressed="false">
+                        <img src="Photos/light.svg" alt="sun" id="theme-icon" />
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <main class="workspace">
+            <aside class="left-panel">
+                <h2>Tools</h2>
+                <h2>Canvas</h2>
+                <h2>Colors</h2>
+            </aside>
+
+        </main>
+    </div>
+</body>
+
 </html>
