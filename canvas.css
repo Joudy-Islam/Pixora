@@ -1,0 +1,10 @@
+#pixelCanvas {
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    display: block;
+}
+.canvasContainer {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
