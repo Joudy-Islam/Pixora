@@ -45,9 +45,46 @@ function renderCanvas() {
             if (color) {
                 ctx.fillStyle = color;
                 ctx.fillRect(x * pixelSize, y * pixelSize, pixelSize, pixelSize);
-
             }
         }
     }
 }
 drawGrid();
+canvas.addEventListener("click", function(event) {
+    const rect = canvas.getBoundingClientReact();
+    const mouseX = event.clientX - rect.left;
+    const mouseY = event.clientY - rect.top;
+    const pixelX = Math.floor(mouseX / pixelSize);
+    const pixelY = Math.floor(mouseY / pixelSize);
+
+    console.log(pixelX, pixelY)
+});
+let hoveredPixel = null
+canvas.addEventListener("mousemove", function(event) {
+    const rect = canvas.getBoundingClientRect();
+    const mouseX = event.clientX - rect.left;
+    const mouseY = event.clientY - rect.top;
+    const pixelX = Math.floor(mouseX / pixelSize);
+    const pixelY = Math.floor(mouseY / pixelSize);
+    hoveredPixel = { x: pixelX, y: pixelY };
+};
+    renderCanvas();
+});
+function renderCanvas() {
+ctx.clearRect(0, 0, canvas.width, canvas.height);
+for (let y = 0; y < gridSize; y++) {
+    for(let x = 0; x < gridSize; y++) {
+        const color = pixels[y][x];
+        if (color) {
+            ctx.fillStyle = color;
+            ctx.fillRect( x * pixelSize, y * pixelSize, pixelSize, pixelSize);
+        }
+    }
+}
+}
+if (hoveredPixel) {
+    ctx.fillStyle = "rgba(0, 0, 0, 0.1)";
+    ctx.fillRect(hoveredPixel.x * pixelSize, hoveredPixel.y * pixelSize, pixelSize, pixelSize); 
+}
+drawGrid();
+}
