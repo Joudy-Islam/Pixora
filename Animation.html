@@ -6,12 +6,30 @@
         <link rel="stylesheet" href="Animation.css">
     </head>
     <body>
-       <input type="file" id="uploadImage" accept="image/*" multiple onchange="handleUpload(event)"/>
-       <div id=" timeline"></div>
-       <img id="preview">
+      <main id="animation">
+            <h1> Animation</h1>
+           <section id="preview">
+           <div id="preview_box">
+            <image id="preview_image" src="" alt="Animation preview">
+           </div>
+           </section>
 
+            <section id="controls">
+                <button id="play"> Play</button>
+                <button id="puase">puase</button>
+                <button id="delate">Delate</button>
+            </section>
 
-
+            <section id="frames">
+                <div id="header">
+                    <h3 > Frames</h3>
+                    <input id="frameinput" type="file" accept="image/*" multiple hidden >
+                    <button id="add">Add</button>
+                </div>
+                <div id="frames_container"></div>
+            </section>
+            <script src="Animation.js"></script>
+       </main>
     </body>
 
 </html>

@@ -1,0 +1,26 @@
+body{
+background-color:rgb(77, 27, 8);
+font-family:Ariel; 
+}
+#animation{
+    width: min(1000px,90%);
+    margin : auto 30px;
+}
+#preview{
+    display:flex;
+    justify-content:center;
+}
+#preview_box{
+    width:600px;
+    height:300px;
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    background-color: rgb(65, 65, 80);
+    border:2px dashed gray;
+    border-radius: rounded;
+}
+#preview_image{
+
+    
+}
