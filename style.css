@@ -18,10 +18,14 @@ button {
 }
 
 .topbar {
-    width: 100%;
+    width: 98%;
     background-color: #1A171B;
     border-bottom: 1px solid #3A2928;
     padding: 16px 24px;
+    border-radius: 15px;
+    margin: 20px;
+    
+    
 }
 
 .web {
@@ -36,31 +40,36 @@ button {
 .brand {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 5px;
 }
 
 .brand img {
-    width: 67px;
-    height: 67px;
+    width:60px;
+    height:60px;
     object-fit: contain;
+    transform: translateY(-5px);
+
 }
 
 .Brand-text {
-    display: felx;
+    display: flex;
     align-items: baseline;
-    gap: 12px;
+    justify-content: center;
+    gap: 90px ;
+    
 }
 
 
 #Pixora-title {
     color: #FFF1D6;
     font-family: "Press Start 2P";
-    font-size: 26px;
+    font-size: 24px;
+   transform: translateY(5px);
 }
 
 #Theme-name {
     color: #927564;
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 400;
     white-space: nowrap;
     padding: 10px;
@@ -89,7 +98,19 @@ button {
     color:#FFE8C7;
   
 }
-
+#export-btn{
+    background-color: #ff7a21;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 90px;
+    font-size: 19px;
+   gap:3px;
+}
+#export-btn:hover{
+background-color: #fca062;
+border-color: #ff7a21;
+}
 
 .img{
     width: 33px;
@@ -99,12 +120,13 @@ button {
 }
 .icon-btn:hover , .theme-btn:hover {
     background-color: #3A2928;
-    border-color:#FF9B57;
+    border-color:#fdaa73;
     color: #3A2928;
 }
 .theme-btn img{
 width: 29px;
 }
+
 
 #pixelCanvas {
     image-rendering: pixelated;
