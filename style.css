@@ -3,8 +3,8 @@
     image-rendering: crisp-edges;
     display: block;
 }
-.canvasContainer {
-    display:flex;
+.canvas-Container {
+    display: flex;
     justify-content: center;
     align-items: center;
 }
