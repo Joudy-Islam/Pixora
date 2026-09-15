@@ -24,13 +24,7 @@ ctx.lineTo(canvas.width, position);
 ctx.stroke();
 }
 }
-let pixels = [];
-const savedCanvases = {
-    8: null,
-    16: null,
-    32: null,
-    64: null
-};
+
 
 let hoveredPixel = null
 let selectedColor = "#000000";
@@ -86,19 +80,44 @@ canvas.addEventListener("mouseleave", function() {
     hoveredPixel = null;
     renderCanvas();
 });
+function getDrawingBounds() {
+   let minX = gridSize;
+   let minY = gridSize;
+   let maxX = -1;
+   let maxY = -1;
+   for (let y = 0; y < gridSize; y++) {
+   for (let x = 0; x < gridSize; x++) {
+    if (pixels[y][x] !== null) {
+        minX = Math.min(minX, x);
+        minY = Math.min(minY, y);
+        maxX = Math.max(maxX, x);
+        maxY = Math.max(maxY, y);
 
+
+
+    }
+   }
+   }
+if (maxX === -1) {
+    return null;
+}
+return { 
+minX,
+minY,
+maxX,
+maxY,
+width: maxX - minX + 1,
+height: maxY - minY + 1
+}
+}
 const gridSizeSelect = document.getElementById("gridSize");
 gridSizeSelect.addEventListener("change", function(){
-  savedCanvases[gridSize] = pixels.map(row => [...row]);
-    gridSize = Number(this.value);
- canvas.width = gridSize * pixelSize;
- canvas.height = gridSize * pixelSize;
- if (savedCanvases[gridSize]) {
-    pixels = savedCanvases[gridSize].map(row => [...row]); } 
-    else {
-     createPixelData();
+    const newGridSize = Number(this.value);
+    const success = changeGridSize(newGridSize);
+    if (!success) {
+        alert("Your drawing is too big for the selected grid size. Please choose a larger grid size.");
+        this.value = gridSize;
     }
-renderCanvas();
 }); 
 
 canvas.addEventListener("mousedown", function(event){
@@ -122,4 +141,36 @@ canvas.addEventListener("mouseup", function(event) {
 window.addEventListener("mouseup", function() {
     isDrawing = false;
 });
-
+function changeGridSize(newSize) {
+    const bounds = getDrawingBounds();
+    if (!bounds) {
+        gridSize = newSize;
+        canvas.width = gridSize * pixelSize;
+        canvas.height = gridSize * pixelSize;
+        createPixelData();
+        renderCanvas();
+        return true;
+    }
+    if (bounds.width > newSize || bounds.height > newSize) {
+        return false;
+    }
+    const oldPixels = pixels;
+    gridSize = newSize;
+    canvas.width = gridSize * pixelSize;
+    canvas.height = gridSize * pixelSize;
+    createPixelData();
+    const newStartX = Math.floor((newSize - bounds.width) / 2);
+    const newStartY = Math.floor((newSize - bounds.height) / 2);
+    for (let y = bounds.minY; y <= bounds.maxY; y++) {
+        for (let x = bounds.minX; x <= bounds.maxX; x++) {
+const color = oldPixels[y][x];
+            if (color !== null) {
+                const newX = newStartX + (x - bounds.minX);
+                const newY = newStartY + (y - bounds.minY);
+                pixels[newY][newX] = color;
+            }
+        }
+    }
+    renderCanvas();
+    return true;
+}
