@@ -10,8 +10,10 @@
             <h1> Animation</h1>
            <section id="preview">
            <div id="preview_box">
-            <image id="preview_image" src="" alt="Animation preview">
-           </div>
+            <img id="preview_image" src="" alt="Animation preview">
+            <p id="empty_message">No frame selected</p>
+        
+        </div>
            </section>
 
             <section id="controls">
@@ -22,10 +24,10 @@
             <section id="frames">
                 <div id="header">
                     <h3 > Frames</h3>
-                    <input id="frameinput" type="file" accept="image/*" multiple hidden >
+                    <input id="frameinput" type="file"  multiple style="display:none" >
                     <button id="add">Add</button>
                 </div>
-                <div id="frames_container"></div>
+                <div id="container"></div>
             </section>
             <script src="Animation.js"></script>
        </main>

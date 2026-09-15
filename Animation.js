@@ -12,7 +12,7 @@ frameInput.addEventListener("change", function(){
     for (let file of frameInput.files){
 
         const imageURL= URL.createObjectURL(file);
-        frame.push(imageURL)
+        frames.push(imageURL)
     }
     displayFrames();
 
@@ -27,7 +27,7 @@ frame.innerHTML= ` <img src="${imageURL}" alt="frame${index+1}">
      frame.addEventListener("click",function(){
         showFrame(index);
    });
-  framesContainer.oppendChild(frame);
+  framesContainer.appendChild(frame);
 });
 }
 function showFrame(index){
@@ -35,11 +35,12 @@ function showFrame(index){
     previewImage.src=frames[index];
     previewImage.style.display="block";
     emptyMessage.style.display="none";
-    document.querySelectorAll("#frame").forEach(function (frame){
+    document.querySelectorAll(".frame").forEach(function (frame){
         frame.classList.remove("selected");
     });
-    document.querySelectorAll("#frame")[index].classList.add("selected");
+    document.querySelectorAll(".frame")[index].classList.add("selected");
 
 
 }
+
 
