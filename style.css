@@ -1,10 +1,131 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    background-color: #11131A;
+    color: #FFE8C7;
+    font-family: "vt323";
+
+}
+
+button {
+    font: inherit;
+    cursor: pointer;
+}
+
+.topbar {
+    width: 100%;
+    background-color: #1A171B;
+    border-bottom: 1px solid #3A2928;
+    padding: 16px 24px;
+}
+
+.web {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.brand img {
+    width: 67px;
+    height: 67px;
+    object-fit: contain;
+}
+
+.Brand-text {
+    display: felx;
+    align-items: baseline;
+    gap: 12px;
+}
+
+
+#Pixora-title {
+    color: #FFF1D6;
+    font-family: "Press Start 2P";
+    font-size: 26px;
+}
+
+#Theme-name {
+    color: #927564;
+    font-size: 13px;
+    font-weight: 400;
+    white-space: nowrap;
+    padding: 10px;
+}
+
+.btns {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.icon-btn,
+.theme-btn,
+.primary-btn {
+
+    min-height: 40px;
+    border: 1px solid #927564;
+    border-radius: 10px;
+}
+
+
 #pixelCanvas {
     image-rendering: pixelated;
     image-rendering: crisp-edges;
     display: block;
 }
+
 .canvas-Container {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.black-ops-one-regular {
+    font-family: "Black Ops One", system-ui;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.bona-nova-regular {
+    font-family: "Bona Nova", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.bona-nova-bold {
+    font-family: "Bona Nova", serif;
+    font-weight: 700;
+    font-style: normal;
+}
+
+.bona-nova-regular-italic {
+    font-family: "Bona Nova", serif;
+    font-weight: 400;
+    font-style: italic;
+}
+
+.press-start-2p-regular {
+    font-family: "Press Start 2P", system-ui;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.vt323-regular {
+    font-family: "VT323", monospace;
+    font-weight: 400;
+    font-style: normal;
 }

@@ -6,7 +6,13 @@
     <meta name="viewport" content="width=device-width , initial-scale=1.0" />
     <title>Pixora</title>
     <link rel="stylesheet" href="style.css" />
-        <script src="canvas.js" defer></script>
+    <script src="canvas.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Bona+Nova:ital,wght@0,400;0,700;1,400&family=Press+Start+2P&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Bona+Nova:ital,wght@0,400;0,700;1,400&family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
 
 </head>
 
@@ -14,9 +20,13 @@
     <div class="app">
         <header class="topbar">
             <div class="web">
-                <img src="Photos/Logo.png" alt="Logo" />
-                <h1 id="Pixora">Pixora</h1>
-                <p id="Theme">-Harvest Season</p>
+                <div class="brand">
+                    <img src="Photos/Logo.png" alt="Pixora Logo" />
+                    <div class="Brand-text">
+                    <h1 id="Pixora-title">Pixora</h1>
+                    <span id="Theme-name">--Harvest Season--</span>
+                </div>
+                </div>
                 <div class="btns">
                     <button class="icon-btn" id="undo-btn" type="button" aria-label="undo last action">
                         ↶
@@ -44,7 +54,7 @@
                 <h2>Colors</h2>
             </aside>
             <!--Canvas-->
-              <section class="studio">
+            <section class="studio">
                 <div class="canvas-container">
                     <canvas id="pixelCanvas"></canvas>
                 </div>
