@@ -80,7 +80,31 @@ button {
     border: 1px solid #927564;
     border-radius: 10px;
 }
+.icon-btn, .theme-btn{
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #292027;
+    color:#FFE8C7;
+  
+}
 
+
+.img{
+    width: 33px;
+}
+.imgg{
+    width: 22px;
+}
+.icon-btn:hover , .theme-btn:hover {
+    background-color: #3A2928;
+    border-color:#FF9B57;
+    color: #3A2928;
+}
+.theme-btn img{
+width: 29px;
+}
 
 #pixelCanvas {
     image-rendering: pixelated;
