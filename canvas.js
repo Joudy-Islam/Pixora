@@ -2,10 +2,10 @@ console.log("CANVAS JS IS RUNNING");
 const canvas = document.getElementById("pixelCanvas");
 const ctx = canvas.getContext("2d");
 let gridSize = 8;
-const pixelSize= 24;
-canvas.width = gridSize * pixelSize;
-canvas.height = gridSize * pixelSize;
-
+const canvasSize= 350;
+let pixelSize = canvasSize / gridSize;
+canvas.width = canvasSize;
+canvas.height = canvasSize;
 function drawGrid() {
     ctx.strokeStyle = "#cccccc";
     ctx.lineWidth = 1; 
@@ -29,6 +29,7 @@ ctx.stroke();
 let hoveredPixel = null
 let selectedColor = "#000000";
 let isDrawing = false;
+let pixels = []
 
 function createPixelData() {
     pixels = [];
@@ -69,7 +70,6 @@ for (let y = 0; y < gridSize; y++) {
     }
 }
 }
-
 if (hoveredPixel) {
     ctx.fillStyle = "rgba(0, 0, 0, 0.1)";
     ctx.fillRect(hoveredPixel.x * pixelSize, hoveredPixel.y * pixelSize, pixelSize, pixelSize); 
@@ -145,8 +145,7 @@ function changeGridSize(newSize) {
     const bounds = getDrawingBounds();
     if (!bounds) {
         gridSize = newSize;
-        canvas.width = gridSize * pixelSize;
-        canvas.height = gridSize * pixelSize;
+        pixelSize = canvasSize / gridSize;
         createPixelData();
         renderCanvas();
         return true;
@@ -156,8 +155,7 @@ function changeGridSize(newSize) {
     }
     const oldPixels = pixels;
     gridSize = newSize;
-    canvas.width = gridSize * pixelSize;
-    canvas.height = gridSize * pixelSize;
+    pixelSize = canvasSize / gridSize
     createPixelData();
     const newStartX = Math.floor((newSize - bounds.width) / 2);
     const newStartY = Math.floor((newSize - bounds.height) / 2);
