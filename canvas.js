@@ -1,3 +1,4 @@
+console.log("CANVAS JS IS RUNNING");
 const canvas = document.getElementById("pixelCanvas");
 const ctx = canvas.getContext("2d");
 let gridSize = 8;
@@ -24,6 +25,17 @@ ctx.stroke();
 }
 }
 let pixels = [];
+const savedCanvases = {
+    8: null,
+    16: null,
+    32: null,
+    64: null
+};
+
+let hoveredPixel = null
+let selectedColor = "#000000";
+let isDrawing = false;
+
 function createPixelData() {
     pixels = [];
     for (let y = 0; y < gridSize; y++) {
@@ -36,19 +48,8 @@ function createPixelData() {
 }
 createPixelData();
 
-drawGrid();
-canvas.addEventListener("click", function(event) {
-    const rect = canvas.getBoundingClientRect();
-    const mouseX = event.clientX - rect.left;
-    const mouseY = event.clientY - rect.top;
-    const pixelX = Math.floor(mouseX / pixelSize);
-    const pixelY = Math.floor(mouseY / pixelSize);
-    if(pixelX >= 0 && pixelX < gridSize && pixelY >= 0 && pixelY < gridSize) {
-    pixels[pixelY][pixelX] = selectedColor;
-    console.log(pixelX, pixelY)
-    }
-});
-let hoveredPixel = null
+renderCanvas();
+
 canvas.addEventListener("mousemove", function(event) {
     const rect = canvas.getBoundingClientRect();
     const mouseX = event.clientX - rect.left;
@@ -59,8 +60,9 @@ canvas.addEventListener("mousemove", function(event) {
     if (isDrawing) {
         drawPixel(event)
     }
-
+    else {
     renderCanvas();
+    }
 });
 function renderCanvas() {
 ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -87,16 +89,18 @@ canvas.addEventListener("mouseleave", function() {
 
 const gridSizeSelect = document.getElementById("gridSize");
 gridSizeSelect.addEventListener("change", function(){
- gridSize = Number(this.value);
+  savedCanvases[gridSize] = pixels.map(row => [...row]);
+    gridSize = Number(this.value);
  canvas.width = gridSize * pixelSize;
  canvas.height = gridSize * pixelSize;
-createPixelData();
+ if (savedCanvases[gridSize]) {
+    pixels = savedCanvases[gridSize].map(row => [...row]); } 
+    else {
+     createPixelData();
+    }
 renderCanvas();
-});
+}); 
 
-
-let selectedColor = "#000000";
-let isDrawing = false;
 canvas.addEventListener("mousedown", function(event){
     isDrawing = true;
     drawPixel(event);
@@ -118,3 +122,4 @@ canvas.addEventListener("mouseup", function(event) {
 window.addEventListener("mouseup", function() {
     isDrawing = false;
 });
+
