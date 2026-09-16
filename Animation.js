@@ -39,7 +39,7 @@ function showFrame(index){
         frame.classList.remove("selected");
     });
     document.querySelectorAll(".frame")[index].classList.add("selected");
-
 }
+
 
 
