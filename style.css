@@ -126,8 +126,24 @@ border-color: #ff7a21;
 .theme-btn img{
 width: 29px;
 }
+.left-panel{
+    background-color: #1A171B;
+    border: 2px solid #927564;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+width: 90%;
 
-
+}
+.imgg{
+    width:30px;
+}
+.divider-line{
+    border-top: 2px solid #9275648d;
+    width:20%;
+    margin:15px 0;
+}
 #pixelCanvas {
     image-rendering: pixelated;
     image-rendering: crisp-edges;

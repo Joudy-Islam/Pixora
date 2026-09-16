@@ -27,7 +27,7 @@ ctx.stroke();
 
 
 let hoveredPixel = null
-let selectedColor = "#000000";
+let selectedColor = "#ffffff";
 let isDrawing = false;
 let pixels = []
 
