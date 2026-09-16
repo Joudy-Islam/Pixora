@@ -7,13 +7,14 @@
     <meta name="viewport" content="width=device-width , initial-scale=1.0" />
     <title>Pixora</title>
     <link rel="stylesheet" href="style.css" />
-    <script src="canvas.js" defer></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Bona+Nova:ital,wght@0,400;0,700;1,400&family=Press+Start+2P&display=swap" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Bona+Nova:ital,wght@0,400;0,700;1,400&family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+    <script src="canvas.js" defer></script>
+    <script src="Animation.js"></script>
 
 </head>
 
@@ -52,7 +53,7 @@
         <main class="workspace">
             <aside class="left-panel">
                 <h2>Tools</h2>
-                <label for="gridsize">Grid Size</label>
+                <label for="gridSize">Grid Size</label>
                   <select id = "gridSize">
         <option value="8">8 x 8</option>
         <option value="16">16 x 16</option>
@@ -69,7 +70,34 @@
                     <canvas id="pixelCanvas"></canvas>
                 </div>
             </section>
-        </main>
+            <!--Animation-->
+              <section id="animation">
+            <h1> Animation</h1>
+           <section id="preview">
+           <div id="preview_box">
+            <img id="preview_image" src="" alt="Animation preview">
+            <p id="empty_message">No frame selected</p>
+        
+        </div>
+           </section>
+
+            <section id="controls">
+                <button id="play"> Play</button>
+                <button id="pause">Pause</button>
+            </section>
+
+            <section id="frames">
+                <div id="header">
+                    <h3 > Frames</h3>
+                    <input id="frameinput" type="file"  multiple style="display:none" >
+                    <button id="add">Add</button>
+                </div>
+                <div id="container"></div>
+            </section>
+              </section>
+        </main> 
+   
     </div>
 </body>
+</html>
 
