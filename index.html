@@ -1,56 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width , initial-scale=1.0" />
-    <title>Pixora</title>
-    <link rel="stylesheet" href="style.css" />
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="styles.css">
         <script src="canvas.js" defer></script>
+    </head>
+    <select id = "gridSize">
+        <option value="8">8 x 8</option>
+        <option value="16">16 x 16</option>
+        <option value="32">32 x 32</option>
+        <option value="64">64 x 64</option>
 
-</head>
-
-<body>
-    <div class="app">
-        <header class="topbar">
-            <div class="web">
-                <img src="Photos/Logo.png" alt="Logo" />
-                <h1 id="Pixora">Pixora</h1>
-                <p id="Theme">-Harvest Season</p>
-                <div class="btns">
-                    <button class="icon-btn" id="undo-btn" type="button" aria-label="undo last action">
-                        ↶
-
-                    </button>
-                    <button class="icon-btn" id="redo-btn" type="button" aria-label="Redo last action">
-                        ↷
-                    </button>
-
-                    <button class="primary-btn" id="export-btn" type="button">
-                        Export
-                    </button>
-                    <button class="theme-btn" id="light-dark-mood-btn" type="button" aria-label="Switch to light mood"
-                        aria-pressed="false">
-                        <img src="Photos/light.svg" alt="sun" id="theme-icon" />
-                    </button>
-                </div>
-            </div>
-        </header>
-
-        <main class="workspace">
-            <aside class="left-panel">
-                <h2>Tools</h2>
-                <h2>Canvas</h2>
-                <h2>Colors</h2>
-            </aside>
-            <!--Canvas-->
-              <section class="studio">
-                <div class="canvas-container">
-                    <canvas id="pixelCanvas"></canvas>
-                </div>
-            </section>
-        </main>
+    </select>
+<main class="studio">
+<section class="workspace">
+    <div class="canvas-container"></div>
+        <canvas id="pixelCanvas"></canvas>
     </div>
-</body>
-
+</section>
+</main>
 </html>
