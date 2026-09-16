@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title> Pixora.Animation</title>
+        <link rel="stylesheet" href="Animation.css">
+    </head>
+    <body>
+      <main id="animation">
+            <h1> Animation</h1>
+           <section id="preview">
+           <div id="preview_box">
+            <img id="preview_image" src="" alt="Animation preview">
+            <p id="empty_message">No frame selected</p>
+        
+        </div>
+           </section>
+
+            <section id="controls">
+                <button id="play"> Play</button>
+                <button id="puase">puase</button>
+            </section>
+
+            <section id="frames">
+                <div id="header">
+                    <h3 > Frames</h3>
+                    <input id="frameinput" type="file"  multiple style="display:none" >
+                    <button id="add">Add</button>
+                </div>
+                <div id="container"></div>
+            </section>
+            <script src="Animation.js"></script>
+       </main>
+    </body>
+
+</html>
