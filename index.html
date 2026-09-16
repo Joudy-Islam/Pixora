@@ -8,13 +8,16 @@
     <title>Pixora</title>
     <link rel="stylesheet" href="style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Bona+Nova:ital,wght@0,400;0,700;1,400&family=Press+Start+2P&display=swap" rel="stylesheet">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Bona+Nova:ital,wght@0,400;0,700;1,400&family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
-    <script src="canvas.js" defer></script>
-    <script src="Animation.js"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Bona+Nova:ital,wght@0,400;0,700;1,400&family=Press+Start+2P&display=swap"
+        rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Bona+Nova:ital,wght@0,400;0,700;1,400&family=Press+Start+2P&family=VT323&display=swap"
+        rel="stylesheet">
+
 
 </head>
 
@@ -25,9 +28,9 @@
                 <div class="brand">
                     <img src="Photos/new_logo.png" alt="Pixora Logo" />
                     <div class="Brand-text">
-                    <h1 id="Pixora-title">Pixora</h1>
-                    <span id="Theme-name">🍂--Harvest Season--</span>
-                </div>
+                        <h1 id="Pixora-title">Pixora</h1>
+                        <span id="Theme-name">🍂--Harvest Season--</span>
+                    </div>
                 </div>
                 <div class="btns">
                     <button class="icon-btn" id="undo-btn" type="button" aria-label="undo last action">
@@ -52,17 +55,34 @@
 
         <main class="workspace">
             <aside class="left-panel">
+                <span id="text">PIXEL STUDIO</span>
                 <h2>Tools</h2>
-                <label for="gridSize">Grid Size</label>
-                  <select id = "gridSize">
-        <option value="8">8 x 8</option>
-        <option value="16">16 x 16</option>
-        <option value="32">32 x 32</option>
-        <option value="64">64 x 64</option>
 
-    </select>
-                <h2>Canvas</h2>
-                <h2>Colors</h2>
+                <h4 class="texxt">Drawing tools</h4>
+                <button class="tools" id="pencil" type="button">
+                    <img src="Photos/pencil.svg" alt="Pencile-icon">Pencil
+                </button>
+                <button class="tools" id="eraser" type="button">
+                    <img src="Photos/eraser.svg" alt="eraser-icon">Eraser
+                </button>
+                <button class="tools" id="fill" type="button">
+                    <img src="Photos/fill.svg" alt="fill-icon">Fill
+                </button>
+                <button class="tools" id="picker" type="button">
+                    <img src="Photos/color-picker.svg" alt="color-picker-logo">picker
+                </button>
+
+
+                <h4 class="texxt">Canvas size</h4>
+                <label for="gridSize">Grid Size</label>
+                <select id="gridSize">
+                    <option value="8">8 x 8</option>
+                    <option value="16">16 x 16</option>
+                    <option value="32">32 x 32</option>
+                    <option value="64">64 x 64</option>
+
+                </select>
+                <!--COLORS NEXT!!-->
             </aside>
             <!--Canvas-->
             <section class="studio">
@@ -71,33 +91,35 @@
                 </div>
             </section>
             <!--Animation-->
-              <section id="animation">
-            <h1> Animation</h1>
-           <section id="preview">
-           <div id="preview_box">
-            <img id="preview_image" src="" alt="Animation preview">
-            <p id="empty_message">No frame selected</p>
-        
-        </div>
-           </section>
+            <section id="animation">
+                <h1> Animation</h1>
+                <section id="preview">
+                    <div id="preview_box">
+                        <img id="preview_image" src="" alt="Animation preview">
+                        <p id="empty_message">No frame selected</p>
 
-            <section id="controls">
-                <button id="play"> Play</button>
-                <button id="pause">Pause</button>
-            </section>
+                    </div>
+                </section>
 
-            <section id="frames">
-                <div id="header">
-                    <h3 > Frames</h3>
-                    <input id="frameinput" type="file"  multiple style="display:none" >
-                    <button id="add">Add</button>
-                </div>
-                <div id="container"></div>
+                <section id="controls">
+                    <button id="play"> Play</button>
+                    <button id="pause">Pause</button>
+                </section>
+
+                <section id="frames">
+                    <div id="header">
+                        <h3> Frames</h3>
+                        <input id="frameinput" type="file" multiple style="display:none">
+                        <button id="add">Add</button>
+                    </div>
+                    <div id="container"></div>
+                </section>
             </section>
-              </section>
-        </main> 
-   
+        </main>
+
     </div>
+    <script src="canvas.js" defer></script>
+    <script src="Animation.js"></script>
 </body>
-</html>
 
+</html>
