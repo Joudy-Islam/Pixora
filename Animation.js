@@ -40,7 +40,6 @@ function showFrame(index){
     });
     document.querySelectorAll(".frame")[index].classList.add("selected");
 
-
 }
 
 
