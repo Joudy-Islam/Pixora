@@ -107,7 +107,7 @@ button {
     font-size: 19px;
    gap:3px;
 }
-#export-btn:hover{
+#export-btn: hover{
 background-color: #fca062;
 border-color: #ff7a21;
 }
@@ -174,4 +174,71 @@ width: 29px;
     font-family: "VT323", monospace;
     font-weight: 400;
     font-style: normal;
+}
+#preview{
+    display: flex;
+    justify-content: center;
+}
+#preview_box{
+    width:400px;
+    height:200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+   border : 10px solid gray;
+    border-radius: 8px;
+}
+#preview_image{
+max-width:100%;
+max-height:100%;
+display: none;
+
+}
+#controls{
+ display: flex;
+ justify-content: center;
+ gap:10px;
+ margin:20px 0;
+
+}
+#controls Button{
+    width:60px;
+    height:40px;
+    border: 1px solid gray;
+    border-radius:8px;
+  
+    cursor: pointer;
+    font-size:15px;
+
+}
+
+#frames{
+    margin-top:30px;
+}
+#header{
+    display: flex;
+    align-items: center;
+    justify-content:space-between;
+    margin-bottom:15px;
+
+}
+#container{
+    min-height:135px;
+    display: flex;
+    gap:15px;
+    padding:15px;
+   
+    border-radius:15px;
+   
+    overflow-x: auto;
+
+}
+
+#add{
+padding:10px 5px;
+border: none;
+border-radius:8px;
+
+cursor: pointer;
 }
