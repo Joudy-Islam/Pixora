@@ -6,8 +6,31 @@ const frameInput = document.getElementById("frameinput");
 const framesContainer = document.getElementById("container");
 const  previewImage =document.getElementById("preview_image");
 const emptyMessage = document.getElementById("empty_message");
+let lastTime = performance.now();
+let framecount= 0;
+let fps=0;
+let running = false;
 let frames = [];
 let currentFrame = 0;
+
+
+function fpsLoop(){
+    if (!running) return;
+
+    now=performance.now();
+    framecount++;
+
+    if (now - lastTime >= 1000){
+          fps = framecount;
+          framecount=0;
+          lastTime=now;
+          document.getElementById("fpscounter").textcontent= `FPS ${fps}`;
+          
+    }    
+    requestAnimationFrame();
+}
+
+// delete button
 deleteBtn.addEventListener("click",function(){
          if(frames.length>0){
             frames.splice(currentFrame,1)
@@ -24,6 +47,21 @@ deleteBtn.addEventListener("click",function(){
             displayFrames();
          }
 });
+
+// play button 
+playBtn.addEventListener("click", function(){
+      if (!running){
+        running= true;
+        lastTime = performance.now();
+        fpsLoop();
+
+      }     
+});
+//pause Button
+pauseBtn.addEventListener("click", function(){
+       running= false;
+});
+//Add button
 addFrameBtn.addEventListener("click", function(){
        frameInput.click();
 });
@@ -60,6 +98,3 @@ function showFrame(index){
     });
     document.querySelectorAll(".frame")[index].classList.add("selected");
 }
-
-
-
