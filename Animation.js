@@ -12,6 +12,7 @@ let fps=0;
 let running = false;
 let frames = [];
 let currentFrame = 0;
+let playInterval = null;
 
 
 function fpsLoop(){
@@ -29,6 +30,8 @@ function fpsLoop(){
     }    
     requestAnimationFrame();
 }
+
+
 
 // delete button
 deleteBtn.addEventListener("click",function(){
@@ -50,12 +53,29 @@ deleteBtn.addEventListener("click",function(){
 
 // play button 
 playBtn.addEventListener("click", function(){
-      if (!running){
+      if (!playInterval && frame.length > 0){
+        let lastTime = performance.now(); 
+        let framecount=0;
+
+     playInterval = showInterval( () => {
+    showFrame = currentFrame;
+    currentFrame ++;
+    if (currentFrame >= framelength ){
+        currentFrame = 0;
+      }
+   
+    
+    
+
+}, 1000/10); 
+    
+    if (!running){
         running= true;
         lastTime = performance.now();
         fpsLoop();
 
-      }     
+      }    
+   
 });
 //pause Button
 pauseBtn.addEventListener("click", function(){
