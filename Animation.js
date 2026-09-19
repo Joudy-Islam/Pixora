@@ -25,10 +25,10 @@ function fpsLoop(){
           fps = framecount;
           framecount=0;
           lastTime=now;
-          document.getElementById("fpscounter").textcontent= `FPS ${fps}`;
+          document.getElementById("fpscounter").textContent= `FPS ${fps}`;
           
     }    
-    requestAnimationFrame();
+    requestAnimationFrame(fpsLoop);    
 }
 
 
@@ -53,11 +53,11 @@ deleteBtn.addEventListener("click",function(){
 
 // play button 
 playBtn.addEventListener("click", function(){
-      if (!playInterval && frame.length > 0){
+      if (!playInterval && frames.length > 0){
         let lastTime = performance.now(); 
         let framecount=0;
 
-     playInterval = showInterval( () => {
+     playInterval = setInterval( () => {
     showFrame = currentFrame;
     currentFrame ++;
     if (currentFrame >= framelength ){
