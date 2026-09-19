@@ -2,10 +2,15 @@ console.log("CANVAS JS IS RUNNING");
 const canvas = document.getElementById("pixelCanvas");
 const ctx = canvas.getContext("2d");
 let gridSize = 8;
-const canvasSize= 350;
-let pixelSize = canvasSize / gridSize;
-canvas.width = canvasSize;
-canvas.height = canvasSize;
+const basePixelSize = 24;
+let zoom = 1;
+let pixelSize = basePixelSize * zoom;
+canvas.width = gridSize * pixelSize;
+canvas.height = gridSize * pixelSize;
+
+const zoomInButton = document.getElementById("zoomIn");
+const zoomOutButton = document.getElementById("zoomOut");
+const zoomLevel = document.getElementById("zoomLevel");
 function drawGrid() {
     ctx.strokeStyle = "#cccccc";
     ctx.lineWidth = 1; 
@@ -29,6 +34,7 @@ ctx.stroke();
 let hoveredPixel = null
 let selectedColor = "#000000";
 let isDrawing = false;
+let selectedTool = "pencil";
 let pixels = []
 
 function createPixelData() {
@@ -131,8 +137,9 @@ function drawPixel(event) {
      const pixelX = Math.floor (mouseX / pixelSize);
      const pixelY = Math.floor (mouseY / pixelSize);
      if (pixelX >= 0 && pixelX < gridSize && pixelY >= 0 && pixelY < gridSize) {
-        pixels[pixelY][pixelX] = selectedColor;
-        renderCanvas();
+        if (selectedTool === "pencil") {pixels[pixelY][pixelX] = selectedColor;}
+        if (selectedTool === "eraser") {pixels[pixelY][pixelX] = null;
+            renderCanvas(); }
      }
 }
 canvas.addEventListener("mouseup", function(event) {
@@ -145,7 +152,7 @@ function changeGridSize(newSize) {
     const bounds = getDrawingBounds();
     if (!bounds) {
         gridSize = newSize;
-        pixelSize = canvasSize / gridSize;
+        pixelSize = basePixelSize * zoom;
         createPixelData();
         renderCanvas();
         return true;
@@ -155,7 +162,7 @@ function changeGridSize(newSize) {
     }
     const oldPixels = pixels;
     gridSize = newSize;
-    pixelSize = canvasSize / gridSize
+    pixelSize = basePixelSize * zoom;
     createPixelData();
     const newStartX = Math.floor((newSize - bounds.width) / 2);
     const newStartY = Math.floor((newSize - bounds.height) / 2);
@@ -172,3 +179,30 @@ const color = oldPixels[y][x];
     renderCanvas();
     return true;
 }
+const pencilTool = document.getElementById("pencilTool");
+const eraserTool = document.getElementById("eraserTool");
+pencilTool.addEventListener("click", function() {
+    selectedTool = "pencil";
+});
+eraserTool.addEventListener("click", function() {
+    selectedTool = "eraser";
+});
+function updateZoom() {
+    pixelSize = basePixelSize * zoom;
+    canvas.width = gridSize * pixelSize;
+    canvas.height = gridSize * pixelSize;
+    zoomLevel.textContent = `${Math.round(zoom * 100)}%`;
+    renderCanvas();
+}
+zoomInButton.addEventListener("click", function() {
+    if(zoom < 4) {
+        zoom += 0.25;
+        updateZoom();
+    }
+});
+zoomOutButton.addEventListener("click", function() {
+    if(zoom > 0.25) {
+        zoom -= 0.25;
+        updateZoom();
+    }
+});
