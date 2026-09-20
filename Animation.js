@@ -15,6 +15,16 @@ let currentFrame = 0;
 let playInterval = null;
 
 
+
+let FPS=10 ;
+let lastFrameTime = 0;
+function playLoop(TimesTamp){
+    if (!running) return;
+    if (timesTamp - lastFrameTime >= 1000 / FPS ){
+        showFram(currentFrame)
+    }
+}
+
 function fpsLoop(){
     if (!running) return;
 
@@ -58,9 +68,9 @@ playBtn.addEventListener("click", function(){
         let framecount=0;
 
      playInterval = setInterval( () => {
-    showFrame = currentFrame;
+    showFrame (currentFrame) ;
     currentFrame ++;
-    if (currentFrame >= framelength ){
+    if (currentFrame >= frame.length ){
         currentFrame = 0;
       }
    
@@ -76,10 +86,12 @@ playBtn.addEventListener("click", function(){
 
       }    
    
-});
+      }
 //pause Button
 pauseBtn.addEventListener("click", function(){
        running= false;
+       clearInterval(playInterval);
+       playInterval= null;
 });
 //Add button
 addFrameBtn.addEventListener("click", function(){
@@ -99,7 +111,7 @@ framesContainer.innerHTML=" ";
 frames.forEach(function(imageURL,index){
 let frame= document.createElement("div");
 frame.classList.add("frame");
-frame.innerHTML= ` <img src="${imageURL}" alt="frame${index+1}">
+frame.innerHTML= `<img src="${imageURL}" alt="frame${index+1}">
 <span id="frame number>${index+1}</span>`;
      frame.addEventListener("click",function(){
         showFrame(index);
@@ -109,12 +121,12 @@ frame.innerHTML= ` <img src="${imageURL}" alt="frame${index+1}">
 }
 
 function showFrame(index){
-    current=index;
+    currentFrame=index;
     previewImage.src=frames[index];
     previewImage.style.display="block";
     emptyMessage.style.display="none";
-    document.querySelectorAll(".frame").forEach(function (frame){
-        frame.classList.remove("selected");
+    document.querySelectorAll(".frame").forEach( frame >= {
+       frame.classList.remove("selected");
     });
     document.querySelectorAll(".frame")[index].classList.add("selected");
-}
+} 
