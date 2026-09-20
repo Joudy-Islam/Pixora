@@ -138,6 +138,9 @@ width: 29px;
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 350px;
+    height: 350px;
+    overflow: auto;
 }
 
 .black-ops-one-regular {
