@@ -12,18 +12,15 @@ let fps=0;
 let running = false;
 let frames = [];
 let currentFrame = 0;
-
-
-
-
 let FPS=10 ;
 let lastFrameTime = 0;
+
 function playLoop(timestamp){
     if (!running) return;
     if (timestamp - lastFrameTime >= 1000 / FPS ){
         showFrame(currentFrame);
         currentFrame++;
-        if (currentFrame >= frames.length){ 
+        if (currentFrame>= frames.length){ 
              currentFrame = 0;
             }
           lastFrameTime = timestamp ;
@@ -34,8 +31,8 @@ function playLoop(timestamp){
 function fpsLoop(){
     if (!running) return;
 
-    now=performance.now();
-    framecount++;
+   let now=performance.now();
+   framecount++;
 
     if (now - lastTime >= 1000){
           fps = framecount;
@@ -99,7 +96,7 @@ frames.forEach(function(imageURL,index){
 let frame= document.createElement("div");
 frame.classList.add("frame");
 frame.innerHTML= `<img src="${imageURL}" alt="frame${index+1}">
-<span class="frame-number>${index+1}</span>`;
+<span class="frame-number">${index+1}</span>`;
      frame.addEventListener("click",function(){
         showFrame(index);
    });
@@ -113,7 +110,7 @@ function showFrame(index){
     previewImage.style.display="block";
     emptyMessage.style.display="none";
     document.querySelectorAll(".frame").forEach( frame => {
-       frames.classList.remove("selected");
+       frame.classList.remove("selected");
     });
     document.querySelectorAll(".frame")[index].classList.add("selected");
-} 
+}
