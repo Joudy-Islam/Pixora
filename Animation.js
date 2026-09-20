@@ -21,8 +21,14 @@ let lastFrameTime = 0;
 function playLoop(TimesTamp){
     if (!running) return;
     if (timesTamp - lastFrameTime >= 1000 / FPS ){
-        showFram(currentFrame)
+        showFram(currentFrame);
+        currentFrame++;
+        if (currentFrame >= frames.length){ 
+             currentFrame = 0;
+            }
+          lastFrameTime = TimesTamp ;
     }
+    requestAnimationFrame(playLoop);
 }
 
 function fpsLoop(){
@@ -63,30 +69,12 @@ deleteBtn.addEventListener("click",function(){
 
 // play button 
 playBtn.addEventListener("click", function(){
-      if (!playInterval && frames.length > 0){
-        let lastTime = performance.now(); 
-        let framecount=0;
-
-     playInterval = setInterval( () => {
-    showFrame (currentFrame) ;
-    currentFrame ++;
-    if (currentFrame >= frame.length ){
-        currentFrame = 0;
-      }
-   
-    
-    
-
-}, 1000/10); 
-    
-    if (!running){
-        running= true;
-        lastTime = performance.now();
+      if (!running && frames.length > 0){
+        running= true ;
+        requestAnimationFrame(playLoop);
         fpsLoop();
-
-      }    
-   
-      }
+       }
+});
 //pause Button
 pauseBtn.addEventListener("click", function(){
        running= false;
@@ -126,7 +114,7 @@ function showFrame(index){
     previewImage.style.display="block";
     emptyMessage.style.display="none";
     document.querySelectorAll(".frame").forEach( frame >= {
-       frame.classList.remove("selected");
+       frames.classList.remove("selected"),
     });
     document.querySelectorAll(".frame")[index].classList.add("selected");
 } 
