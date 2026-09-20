@@ -36,7 +36,9 @@ let hoveredPixel = null
 let selectedColor = "#000000";
 let isDrawing = false;
 let selectedTool = "pencil";
-let pixels = []
+let pixels = [];
+let undoStack = [];
+let redoStack = [];
 
 function createPixelData() {
     pixels = [];
@@ -48,9 +50,35 @@ function createPixelData() {
         pixels.push(row);
     }
 }
-createPixelData();
 
+createPixelData();
+function saveState() {
+    undoStack.push(JSON.stringify(pixels));
+    redoStack = [];
+}
+function undo() {
+    if (undoStack.length === 0) {
+        return;
+    }
+    redoStack.push(JSON.stringify(pixels));
+    pixels = JSON.parse(undoStack.pop());
+    renderCanvas();
+}
+function redo() {
+    if (redoStack.length === 0) {
+        return;
+    }
+    undoStack.push(JSON.stringify(pixels));
+    pixels = JSON.parse(redoStack.pop());
+
+    renderCanvas();
+}
+const undoButton = document.getElementById("undoButton");
+const redoButton = document.getElementById("redoButton");
+undoButton.addEventListener("click", undo);
+redoButton.addEventListener("click", redo);
 renderCanvas();
+redoStack = [];
 
 canvas.addEventListener("mousemove", function(event) {
 const rect = canvas.getBoundingClientRect();
@@ -129,13 +157,14 @@ gridSizeSelect.addEventListener("change", function(){
 }); 
 
 canvas.addEventListener("mousedown", function(event){
+    savaState();
     isDrawing = true;
     drawPixel(event);
 });
 function drawPixel(event) {
 const rect = canvas.getBoundingClientRect();
-const mouseX = (event.clientX - rect.left) / zoom;
-const mouseY = (event.clientY - rect.top) / zoom;
+const mouseX = (event.clientX - rect.left);
+const mouseY = (event.clientY - rect.top);
      const pixelX = Math.floor (mouseX / pixelSize);
      const pixelY = Math.floor (mouseY / pixelSize);
      if (pixelX >= 0 && pixelX < gridSize && pixelY >= 0 && pixelY < gridSize) {
