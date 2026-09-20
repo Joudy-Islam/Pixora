@@ -40,6 +40,7 @@ let pixels = [];
 let undoStack = [];
 let redoStack = [];
 
+
 function createPixelData() {
     pixels = [];
     for (let y = 0; y < gridSize; y++) {
@@ -157,7 +158,11 @@ gridSizeSelect.addEventListener("change", function(){
 }); 
 
 canvas.addEventListener("mousedown", function(event){
-    savaState();
+    if (selectedTool === "fill") {
+        drawPixel(event);
+        return;
+    }
+    saveState();
     isDrawing = true;
     drawPixel(event);
 });
@@ -167,7 +172,8 @@ const mouseX = (event.clientX - rect.left);
 const mouseY = (event.clientY - rect.top);
      const pixelX = Math.floor (mouseX / pixelSize);
      const pixelY = Math.floor (mouseY / pixelSize);
-     if (pixelX >= 0 && pixelX < gridSize && pixelY >= 0 && pixelY < gridSize) {
+        if (pixelX >= 0 && pixelX < gridSize && pixelY >= 0 && pixelY < gridSize) {
+        if (selectedTool === "fill") {saveState(); fillArea(pixelX, pixelY); return;}
         if (selectedTool === "pencil") {pixels[pixelY][pixelX] = selectedColor;}
         if (selectedTool === "eraser") {pixels[pixelY][pixelX] = null;}
             renderCanvas();
@@ -214,11 +220,15 @@ const color = oldPixels[y][x];
 }
 const pencilTool = document.getElementById("pencilTool");
 const eraserTool = document.getElementById("eraserTool");
+const fillTool = document.getElementById("fillTool");
 pencilTool.addEventListener("click", function() {
     selectedTool = "pencil";
 });
 eraserTool.addEventListener("click", function() {
     selectedTool = "eraser";
+});
+fillTool.addEventListener("click", function() {
+selectedTool = "fill";
 });
 function updateCanvasSize() {
     pixelSize = (canvasSize / gridSize);
@@ -229,6 +239,28 @@ function updateZoom() {
     zoomLevel.textContent = `${Math.round(zoom * 100)}%`;
     canvas.style.width = `${canvasSize * zoom}px`;
     canvas.style.height = `${canvasSize * zoom}px`;
+}
+function fillArea(startX, startY) {
+    const targetColor = pixels[startX][startY];
+    if(targetColor === selectedColor) {
+        return;
+    }
+    const queue = [[startX, startY]];
+    while (queue.length > 0) {
+        const [x,y] = queue.shift();
+        if (x < 0 || x >= gridSize || y < 0 || y >= gridSize) {
+            continue;
+        }
+        if(pixels[y][x] !== targetColor) {
+            continue;
+        }
+        pixels[y][x] = selectedColor;
+        queue.push([x + 1, y]);
+        queue.push([x - 1, y]);
+        queue.push([x,y + 1]);
+        queue.push([x,y - 1]);
+    }
+    renderCanvas();
 }
 zoomInButton.addEventListener("click", function() {
     
