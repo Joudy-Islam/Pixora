@@ -12,21 +12,21 @@ let fps=0;
 let running = false;
 let frames = [];
 let currentFrame = 0;
-let playInterval = null;
+
 
 
 
 let FPS=10 ;
 let lastFrameTime = 0;
-function playLoop(TimesTamp){
+function playLoop(timestamp){
     if (!running) return;
-    if (timesTamp - lastFrameTime >= 1000 / FPS ){
-        showFram(currentFrame);
+    if (timestamp - lastFrameTime >= 1000 / FPS ){
+        showFrame(currentFrame);
         currentFrame++;
         if (currentFrame >= frames.length){ 
              currentFrame = 0;
             }
-          lastFrameTime = TimesTamp ;
+          lastFrameTime = timestamp ;
     }
     requestAnimationFrame(playLoop);
 }
@@ -78,8 +78,7 @@ playBtn.addEventListener("click", function(){
 //pause Button
 pauseBtn.addEventListener("click", function(){
        running= false;
-       clearInterval(playInterval);
-       playInterval= null;
+    
 });
 //Add button
 addFrameBtn.addEventListener("click", function(){
@@ -100,7 +99,7 @@ frames.forEach(function(imageURL,index){
 let frame= document.createElement("div");
 frame.classList.add("frame");
 frame.innerHTML= `<img src="${imageURL}" alt="frame${index+1}">
-<span id="frame number>${index+1}</span>`;
+<span class="frame-number>${index+1}</span>`;
      frame.addEventListener("click",function(){
         showFrame(index);
    });
@@ -113,8 +112,8 @@ function showFrame(index){
     previewImage.src=frames[index];
     previewImage.style.display="block";
     emptyMessage.style.display="none";
-    document.querySelectorAll(".frame").forEach( frame >= {
-       frames.classList.remove("selected"),
+    document.querySelectorAll(".frame").forEach( frame => {
+       frames.classList.remove("selected");
     });
     document.querySelectorAll(".frame")[index].classList.add("selected");
 } 
