@@ -57,7 +57,7 @@
             <aside class="left-panel">
                 <span id="text">PIXEL STUDIO</span>
                 <h2>Tools</h2>
-<div class="divider-line"></div>
+                <div class="divider-line"></div>
                 <h4 class="texxt">Drawing tools</h4>
                 <button class="tools" id="pencil" type="button">
                     <img class="imgg" src="Photos/pencil.svg" alt="Pencile-icon">Pencil
@@ -71,7 +71,7 @@
                 <button class="tools" id="picker" type="button">
                     <img class="imgg" src="Photos/color-picker.svg" alt="color-picker-logo">picker
                 </button>
-<div class="divider-line"></div>
+                <div class="divider-line"></div>
 
                 <h4 class="texxt">Canvas size</h4>
                 <label for="gridSize">Grid Size</label>
@@ -82,8 +82,50 @@
                     <option value="64">64 x 64</option>
 
                 </select>
-                <!--COLORS NEXT!!-->
-               
+                <!--COLORSSSS!!-->
+                <section class="colors-section">
+                    <h4 class="texxt">Colors</h4>
+                    <div class="current-color-row">
+                        <div class="current-color" id="currentColorDisplay"></div>
+                        <div class="color-input-wrapper">
+                            <span class="color-label">
+                                Current color
+                            </span>
+                            <input type="text" id="colorValue" value="#FF8B3D" maxlength="7"
+                                aria-label="Current color hex value">
+
+                        </div>
+                        <label for="colorPicker" class="color-picker-btn" aria-label="Open color picker">
+                            <img src="Photos/color-picker.svg" alt="Color picker">
+                        </label>
+
+                        <input type="color" id="colorPicker" value="#FF8B3D" hidden>
+                    </div>
+                    <div class="color-palette" id="colorPallete">
+
+                        <button type="button" class="color-swatch" data-color="#FFF1D6"
+                            style="background-color: #FFF1D6;" aria-label="Select color #FFF1D6"></button>
+                        <button type="button" class="color-swatch" data-color="#FFC857"
+                            style="background-color: #FFC857;" aria-label="Select color #FFC857"></button>
+
+
+                        <button type="button" class="color-swatch" data-color="#FF9F1C"
+                            style="background-color: #FF9F1C;" aria-label="Select color #FF9F1C"></button>
+
+                        <button type="button" class="color-swatch" data-color="#E85D2A"
+                            style="background-color: #E85D2A;" aria-label="Select color #E85D2A"></button>
+
+                        <button type="button" class="color-swatch" data-color="#A9432B"
+                            style="background-color: #A9432B;" aria-label="Select color #A9432B"></button>
+
+                        <button type="button" class="color-swatch" data-color="#65352B"
+                            style="background-color: #65352B;" aria-label="Select color #65352B"></button>
+
+                        <button type="button" class="color-swatch" data-color="#3B2926"
+                            style="background-color: #3B2926;" aria-label="Select-color #3B2926"></button>
+
+                    </div>
+                </section>
                 </section>
             </aside>
             <!--Canvas-->
