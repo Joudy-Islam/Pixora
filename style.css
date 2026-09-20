@@ -129,9 +129,10 @@ width: 29px;
 
 
 #pixelCanvas {
-    image-rendering: pixelated;
-    image-rendering: crisp-edges;
+    width:350px;
+    height: 350px;
     display: block;
+    transform-origin: top left;
 }
 
 .canvas-Container {
@@ -142,6 +143,12 @@ width: 29px;
     height: 350px;
     overflow: auto;
 }
+.canvas-zoom-surface {
+    width: 350px;
+    height: 350px;
+    position: relative;
+}
+
 
 .black-ops-one-regular {
     font-family: "Black Ops One", system-ui;

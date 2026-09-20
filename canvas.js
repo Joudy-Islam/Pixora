@@ -7,7 +7,6 @@ let zoom = 1;
 let pixelSize = (canvasSize / gridSize)
 canvas.width = canvasSize;
 canvas.height = canvasSize;
-const basePixelSize = 43.75;
 
 const zoomInButton = document.getElementById("zoomIn");
 const zoomOutButton = document.getElementById("zoomOut");
@@ -54,23 +53,37 @@ function createPixelData() {
 
 createPixelData();
 function saveState() {
-    undoStack.push(JSON.stringify(pixels));
+    undoStack.push({
+        pixels: JSON.parse(JSON.stringify(pixels)),
+        gridSize: gridSize
+    });
     redoStack = [];
 }
 function undo() {
     if (undoStack.length === 0) {
         return;
     }
-    redoStack.push(JSON.stringify(pixels));
-    pixels = JSON.parse(undoStack.pop());
+    redoStack.push({
+        pixels: JSON.parse(JSON.stringify(pixels)),
+        gridSize: gridSize
+    });
+    const previousState = undoStack.pop();
+    pixels: JSON.parse(JSON.stringify(previousState.pixels));
+    gridSize = previousState.gridSize;
+    pixelSize = canvasSize / gridSize;
     renderCanvas();
 }
 function redo() {
     if (redoStack.length === 0) {
         return;
     }
-    undoStack.push(JSON.stringify(pixels));
-    pixels = JSON.parse(redoStack.pop());
+    undoStack.push({
+        pixels: JSON.parse(JSON.stringify(pixels)),
+        gridSize: gridSize });
+        const nextState = redoStack.pop();
+    pixels = JSON.parse(JSON.stringify(nextState.pixels));
+    gridSize = nextState.gridSize;
+    pixelSize = canvasSize /gridSize;
 
     renderCanvas();
 }
@@ -168,8 +181,8 @@ canvas.addEventListener("mousedown", function(event){
 });
 function drawPixel(event) {
 const rect = canvas.getBoundingClientRect();
-const mouseX = (event.clientX - rect.left);
-const mouseY = (event.clientY - rect.top);
+const mouseX = (event.clientX - rect.left) / zoom;
+const mouseY = (event.clientY - rect.top) / zoom;
      const pixelX = Math.floor (mouseX / pixelSize);
      const pixelY = Math.floor (mouseY / pixelSize);
         if (pixelX >= 0 && pixelX < gridSize && pixelY >= 0 && pixelY < gridSize) {
@@ -196,31 +209,25 @@ window.addEventListener("mouseup", function() {
 });
 function changeGridSize(newSize) {
     const bounds = getDrawingBounds();
-    if (!bounds) {
-        gridSize = newSize;
-        pixelSize = (canvasSize / gridSize);
-        canvas.width = gridSize * pixelSize;
-        canvas.height = gridSize * pixelSize;
-        createPixelData();
-        renderCanvas();
-        return true;
-    }
-    if (bounds.width > newSize || bounds.height > newSize) {
+    if (bounds && (bounds.width > newSize || bounds.height > newSize)) {
         return false;
     }
+    saveState();
     const oldPixels = pixels;
     gridSize = newSize;
     pixelSize = canvasSize / gridSize;
     createPixelData();
-    const newStartX = Math.floor((newSize - bounds.width) / 2);
-    const newStartY = Math.floor((newSize - bounds.height) / 2);
-    for (let y = bounds.minY; y <= bounds.maxY; y++) {
+    if (bounds) {
+        const newStartX = Math.floor((newSize - bounds.width) / 2);
+        const newStartY = Math.floor((newSize - bounds.height) / 2);
+        for (let y = bounds.minY; y <= bounds.maxY; y++) {
         for (let x = bounds.minX; x <= bounds.maxX; x++) {
-const color = oldPixels[y][x];
+        const color = oldPixels[y][x];
             if (color !== null) {
                 const newX = newStartX + (x - bounds.minX);
                 const newY = newStartY + (y - bounds.minY);
                 pixels[newY][newX] = color;
+                }
             }
         }
     }
@@ -231,6 +238,7 @@ const pencilTool = document.getElementById("pencilTool");
 const eraserTool = document.getElementById("eraserTool");
 const fillTool = document.getElementById("fillTool");
 const colorPickerTool = document.getElementById("colorPickerTool")
+const clearCanvasButton = document.getElementById("clearCanvas");
 pencilTool.addEventListener("click", function() {
     selectedTool = "pencil";
 });
@@ -243,18 +251,20 @@ selectedTool = "fill";
 colorPickerTool.addEventListener("click", function() {
     selectedTool = "picker";
 });
-function updateCanvasSize() {
-    pixelSize = (canvasSize / gridSize);
-    canvas.width = gridSize * pixelSize;
-    canvas.height = gridSize * pixelSize;
+function clearCanvas() {
+    saveState();
+    createPixelData();
+    renderCanvas();
 }
 function updateZoom() {
+    const zoomSurface = document.querySelector(".canvas-zoom-surface");
+    zoomSurface.style.width = `${canvasSize * zoom}px`;
+    zoomSurface.style.height = `${canvasSize * zoom}px`;
+    canvas.style.transform = `scale(${zoom})`;
     zoomLevel.textContent = `${Math.round(zoom * 100)}%`;
-    canvas.style.width = `${canvasSize * zoom}px`;
-    canvas.style.height = `${canvasSize * zoom}px`;
 }
 function fillArea(startX, startY) {
-    const targetColor = pixels[startX][startY];
+    const targetColor = pixels[startY][startX];
     if(targetColor === selectedColor) {
         return;
     }
@@ -289,3 +299,10 @@ zoomOutButton.addEventListener("click", function() {
         updateZoom();
     }
 })
+clearCanvasButton.addEventListener("click", function() {
+    const confirmed = confirm("Are you sure you want to clear the canvas?");
+    if (confirmed) {
+        clearCanvas();
+    }
+});
+updateZoom();
