@@ -176,6 +176,15 @@ const mouseY = (event.clientY - rect.top);
         if (selectedTool === "fill") {saveState(); fillArea(pixelX, pixelY); return;}
         if (selectedTool === "pencil") {pixels[pixelY][pixelX] = selectedColor;}
         if (selectedTool === "eraser") {pixels[pixelY][pixelX] = null;}
+        if (selectedTool === "picker") {
+            const pickedColor = pixels[pixelY][pixelX];
+            if (pickedColor !== null) { 
+                selectedColor = pickedColor;
+                selectedTool = "pencil";
+            }
+            return;
+        
+        }
             renderCanvas();
      }
 }
@@ -221,6 +230,7 @@ const color = oldPixels[y][x];
 const pencilTool = document.getElementById("pencilTool");
 const eraserTool = document.getElementById("eraserTool");
 const fillTool = document.getElementById("fillTool");
+const colorPickerTool = document.getElementById("colorPickerTool")
 pencilTool.addEventListener("click", function() {
     selectedTool = "pencil";
 });
@@ -229,6 +239,9 @@ eraserTool.addEventListener("click", function() {
 });
 fillTool.addEventListener("click", function() {
 selectedTool = "fill";
+});
+colorPickerTool.addEventListener("click", function() {
+    selectedTool = "picker";
 });
 function updateCanvasSize() {
     pixelSize = (canvasSize / gridSize);
