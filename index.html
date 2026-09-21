@@ -25,9 +25,9 @@
                 <div class="brand">
                     <img src="Photos/new_logo.png" alt="Pixora Logo" />
                     <div class="Brand-text">
-                    <h1 id="Pixora-title">Pixora</h1>
-                    <span id="Theme-name">🍂--Harvest Season--</span>
-                </div>
+                        <h1 id="Pixora-title">Pixora</h1>
+                        <span id="Theme-name">🍂--Harvest Season--</span>
+                    </div>
                 </div>
                 <div class="btns">
                     <button class="icon-btn" id="undo-btn" type="button" aria-label="undo last action">
@@ -42,27 +42,114 @@
                         <img class="img" src="Photos/export.svg" alt="export logo">
                         Export
                     </button>
-                    <button class="theme-btn" id="light-dark-mood-btn" type="button" aria-label="Switch to light mood"
-                        aria-pressed="false">
-                        <img src="Photos/light.svg" alt="sun" id="theme-icon" />
-                    </button>
+                    
                 </div>
             </div>
         </header>
 
         <main class="workspace">
             <aside class="left-panel">
+                <span id="text">PIXEL STUDIO</span>
                 <h2>Tools</h2>
-                <label for="gridSize">Grid Size</label>
-                  <select id = "gridSize">
-        <option value="8">8 x 8</option>
-        <option value="16">16 x 16</option>
-        <option value="32">32 x 32</option>
-        <option value="64">64 x 64</option>
+                <div class="divider-line">
+                <div class="tools-grid"></div>
+                <h4 class="texxt">Drawing tools</h4>
+                <button class="tools" id="pencil" type="button">
+                    <img class="imgg" src="Photos/pencil.svg" alt="Pencile-icon">Pencil
+                </button>
+                <button class="tools" id="eraser" type="button">
+                    <img class="imgg" src="Photos/eraser.svg" alt="eraser-icon">Eraser
+                </button>
+                <button class="tools" id="fill" type="button">
+                    <img class="imgg" src="Photos/fill.svg" alt="fill-icon">Fill
+                </button>
+                <button class="tools" id="picker" type="button">
+                    <img class="imgg" src="Photos/color-picker.svg" alt="color-picker-logo">picker
+                </button></div>
+                <div class="divider-line"></div>
 
-    </select>
-                <h2>Canvas</h2>
-                <h2>Colors</h2>
+                <h4 class="texxt">Canvas size</h4>
+                <label for="gridSize">Grid Size</label>
+                <select id="gridSize">
+                    <option value="8">8 x 8</option>
+                    <option value="16">16 x 16</option>
+                    <option value="32">32 x 32</option>
+                    <option value="64">64 x 64</option>
+
+                </select>
+                <!--COLORSSSS!!-->
+                <section class="colors-section">
+                    <h4 class="texxt">Colors</h4>
+                    <div class="current-color-row">
+                        <div class="current-color" id="currentColorDisplay"></div>
+                        <div class="color-input-wrapper">
+                            <span class="color-label">
+                                Current color
+                            </span>
+                            <input type="text" id="colorValue" value="#FF8B3D" maxlength="7"
+                                aria-label="Current color hex value">
+
+                        </div>
+                        <label for="colorPicker" class="color-picker-btn" aria-label="Open color picker">
+                            <img src="Photos/color-picker.svg" alt="Color picker">
+                        </label>
+
+                        <input type="color" id="colorPicker" value="#FF8B3D" hidden>
+                    </div>
+                    <div class="color-palette" id="colorPallete">
+
+                        <button type="button" class="color-swatch" data-color="#FFF1D6"
+                            style="background-color: #FFF1D6;" aria-label="Select color #FFF1D6"></button>
+                        <button type="button" class="color-swatch" data-color="#FFC857"
+                            style="background-color: #FFC857;" aria-label="Select color #FFC857"></button>
+
+
+                        <button type="button" class="color-swatch" data-color="#FF9F1C"
+                            style="background-color: #FF9F1C;" aria-label="Select color #FF9F1C"></button>
+
+                        <button type="button" class="color-swatch" data-color="#E85D2A"
+                            style="background-color: #E85D2A;" aria-label="Select color #E85D2A"></button>
+
+                        <button type="button" class="color-swatch" data-color="#A9432B"
+                            style="background-color: #A9432B;" aria-label="Select color #A9432B"></button>
+
+                        <button type="button" class="color-swatch" data-color="#65352B"
+                            style="background-color: #65352B;" aria-label="Select color #65352B"></button>
+
+                        <button type="button" class="color-swatch" data-color="#3B2926"
+                            style="background-color: #3B2926;" aria-label="Select-color #3B2926"></button>
+
+                        <button type="button" class="color-swatch" data-color="#D97706"
+                            style="background-color: #D97706;" aria-label="Select color #D97706"></button>
+
+                        <button type="button" class="color-swatch" data-color="#A65F2B"
+                            style="background-color: #A65F2B;" aria-label="Select color #A65F2B"></button>
+
+                        <button type="button" class="color-swatch" data-color="#7C8038"
+                            style="background-color: #7C8038;" aria-label="Select-color #7C8038"></button>
+
+                        <button type="button" class="color-swatch" data-color="#536B32"
+                            style="background-color: #536B32;" aria-label="Select color #536B32"></button>
+
+                        <button type="button" class="color-swatch" data-color="#596B3A"
+                            style="background-color: #596B3A;" aria-label="Select color #596B3A"></button>
+
+                        <button type="button" class="color-swatch" data-color="#6B6B43"
+                            style="background-color: #6B6B43;" aria-label="Select color #6B6B43"></button>
+
+                        <button type="button" class="color-swatch" data-color="#75483A"
+                            style="background-color: #75483A;" aria-label="Select color #75483A"></button>
+
+                        <button type="button" class="color-swatch" data-color="#9A3F2F"
+                            style="background-color: #9A3F2F;" aria-label="Select color #9A3F2F"></button>
+
+                    </div>
+
+                    <div class="color-spectrum">
+                        <input type="range" id="hueSlider" min="0" max="360" value="25" aria-label="Choose hue">
+                    </div>
+
+                </section>
             </aside>
             <!--Canvas-->
             <section class="studio">
@@ -100,6 +187,8 @@
         </main> 
    
     </div>
+    <script src="canvas.js" defer></script>
+    <script src="Animation.js"></script>
 </body>
-</html>
 
+</html>
