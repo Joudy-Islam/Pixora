@@ -366,7 +366,10 @@ color-picker-btn:hover {
     border: 2px solid #FFE8C7;
     box-shadow: 0 0 0 2px #ff7a21;
 }
-
+.color-swatch.active{
+    border: 2px solid #FFE8C7;
+    box-shadow: 0 0 0 2px #ff7a21;
+}
 .color-spectrum {
     width: 100%;
     height: 25px;
