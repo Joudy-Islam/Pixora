@@ -114,3 +114,187 @@ function showFrame(index){
     });
     document.querySelectorAll(".frame")[index].classList.add("selected");
 }
+exportBtn.addEventListener("click", async function () {
+
+    if (frames.length === 0) {
+        alert("Please add frames first!");
+        return;
+    }
+
+    exportBtn.disabled = true;
+    exportBtn.textContent = "Exporting...";
+
+    try {
+
+        // Load the first image
+        const firstImage = await loadImage(frames[0]);
+
+        // Create canvas
+        const canvas = document.createElement("canvas");
+        const ctx = canvas.getContext("2d");
+
+        canvas.width = firstImage.width;
+        canvas.height = firstImage.height;
+
+        // Create video stream
+        const stream = canvas.captureStream(FPS);
+
+        const recorder = new MediaRecorder(stream, {
+            mimeType: "video/webm"
+        });
+
+        const chunks = [];
+
+        recorder.ondataavailable = function (event) {
+            if (event.data.size > 0) {
+                chunks.push(event.data);
+            }
+        };
+
+        recorder.onstop = function () {
+
+            const blob = new Blob(chunks, {
+                type: "video/webm"
+            });
+
+            const url = URL.createObjectURL(blob);
+
+            const link = document.createElement("a");
+            link.href = url;
+            link.download = "my-animation.webm";
+
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            URL.revokeObjectURL(url);
+
+            exportBtn.disabled = false;
+            exportBtn.textContent = "Export";
+        };
+
+        // Start recording
+        recorder.start();
+
+        // Show every frame
+        for (let i = 0; i < frames.length; i++) {
+
+            const img = await loadImage(frames[i]);
+
+            ctx.clearRect(
+                0,
+                0,
+                canvas.width,
+                canvas.height
+            );
+
+            ctx.drawImage(
+                img,
+                0,
+                0,
+                canvas.width,
+                canvas.height
+            );
+
+            exportBtn.textContent =
+                `Exporting ${i + 1}/${frames.length}`;
+
+            // Wait according to FPS
+            await new Promise(resolve =>
+                setTimeout(resolve, 1000 / FPS)
+            );
+        }
+
+        // Stop recording
+        recorder.stop();
+
+    } catch (error) {
+
+        console.error(error);
+
+        alert("Could not export the animation.");
+
+        exportBtn.disabled = false;
+        exportBtn.textContent = "Export";
+    }
+});
+
+
+function loadImage(src) {
+
+    return new Promise((resolve, reject) => {
+
+        const img = new Image();
+
+        img.onload = function () {
+            resolve(img);
+        };
+
+        img.onerror = function () {
+            reject(new Error("Image failed to load"));
+        };
+
+        img.src = src;
+    });
+}
+
+
+
+exportBtn.addEventListener("click", function () {
+
+    // Create a new canvas for export
+    const exportCanvas = document.createElement("canvas");
+    const exportCtx = exportCanvas.getContext("2d");
+
+    // Make the exported image the same size as the grid
+    exportCanvas.width = gridSize;
+    exportCanvas.height = gridSize;
+
+    // Transparent background
+    exportCtx.clearRect(
+        0,
+        0,
+        exportCanvas.width,
+        exportCanvas.height
+    );
+
+    // Draw the pixel art
+    for (let y = 0; y < gridSize; y++) {
+
+        for (let x = 0; x < gridSize; x++) {
+
+            const color = pixels[y][x];
+
+            if (color !== null) {
+
+                exportCtx.fillStyle = color;
+
+                exportCtx.fillRect(
+                    x,
+                    y,
+                    1,
+                    1
+                );
+            }
+        }
+    }
+
+    // Convert canvas to PNG
+    exportCanvas.toBlob(function (blob) {
+
+        const url = URL.createObjectURL(blob);
+
+        const link = document.createElement("a");
+
+        link.href = url;
+        link.download = "pixel-art.png";
+
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        URL.revokeObjectURL(url);
+
+    }, "image/png");
+});
+>>>>>>> main
