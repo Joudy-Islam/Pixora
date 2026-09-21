@@ -2,7 +2,7 @@ console.log("CANVAS JS IS RUNNING");
 const canvas = document.getElementById("pixelCanvas");
 const ctx = canvas.getContext("2d");
 let gridSize = 8;
-const canvasSize = 350;
+const canvasSize = 500;
 let pixelSize = canvasSize / gridSize;
 canvas.width = canvasSize;
 canvas.height = canvasSize;
