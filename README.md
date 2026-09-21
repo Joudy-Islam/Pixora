@@ -1,7 +1,6 @@
-# pixora
+# Pixora
 A pixel art studio website where you can create, edit, and animate pixel art
-## 📸 Preview
-## features
+## Features
 * Pixel art canvas
 * Color selection
 * Pencil tool
