@@ -127,26 +127,42 @@ border-color: #ff7a21;
 width: 29px;
 }
 
-
-#pixelCanvas {
-    width:350px;
-    height: 350px;
-    display: block;
-    transform-origin: top left;
-}
-
-.canvas-Container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  .canvas-container {
     width: 350px;
     height: 350px;
     overflow: auto;
+    flex-shrink: 0;
 }
+
 .canvas-zoom-surface {
     width: 350px;
     height: 350px;
     position: relative;
+    flex-shrink: 0;
+}
+
+#pixelCanvas {
+    width: 350px;
+    height: 350px;
+    display: block;
+    transform-origin: top left;
+    touch-action: none;
+    overflow: auto;
+    flex-shrink: 0;
+}
+
+.canvas-zoom-surface {
+    width: 350px;
+    height: 350px;
+    position: relative;
+    flex-shrink: 0;
+}
+
+#pixelCanvas {
+    width: 350px;
+    height: 350px;
+    display: block;
+    transform-origin: top left;
 }
 
 

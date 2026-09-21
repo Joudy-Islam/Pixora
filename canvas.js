@@ -33,6 +33,7 @@ ctx.stroke();
 
 let hoveredPixel = null
 let selectedColor = "#000000";
+let showGrid = true;
 let isDrawing = false;
 let selectedTool = "pencil";
 let pixels = [];
@@ -64,13 +65,14 @@ function undo() {
         return;
     }
     redoStack.push({
-        pixels: JSON.parse(JSON.stringify(pixels)),
+        pixels : JSON.parse(JSON.stringify(pixels)),
         gridSize: gridSize
     });
     const previousState = undoStack.pop();
-    pixels: JSON.parse(JSON.stringify(previousState.pixels));
+    pixels = JSON.parse(JSON.stringify(previousState.pixels));
     gridSize = previousState.gridSize;
     pixelSize = canvasSize / gridSize;
+    gridSizeSelect.value = gridSize
     renderCanvas();
 }
 function redo() {
@@ -84,31 +86,29 @@ function redo() {
     pixels = JSON.parse(JSON.stringify(nextState.pixels));
     gridSize = nextState.gridSize;
     pixelSize = canvasSize /gridSize;
+    gridSizeSelect.value = gridSize;
 
     renderCanvas();
 }
 const undoButton = document.getElementById("undoButton");
 const redoButton = document.getElementById("redoButton");
+const gridToggle = document.getElementById("gridToggle");
 undoButton.addEventListener("click", undo);
 redoButton.addEventListener("click", redo);
-renderCanvas();
-redoStack = [];
-
-canvas.addEventListener("mousemove", function(event) {
-const rect = canvas.getBoundingClientRect();
-
-const mouseX = (event.clientX - rect.left) / zoom;
-const mouseY = (event.clientY - rect.top) / zoom;
-    const pixelX = Math.floor(mouseX / pixelSize);
-    const pixelY = Math.floor(mouseY / pixelSize);
-    hoveredPixel = { x: pixelX, y: pixelY };
-    if (isDrawing) {
-        drawPixel(event)
+gridToggle.addEventListener("click", function() {
+    showGrid = !showGrid
+    if (showGrid) {
+        gridToggle.textContent = "Hide Grid";
     }
     else {
-    renderCanvas();
+    gridToggle.textContent = "Show Grid";
     }
-});
+    renderCanvas();
+    });
+
+renderCanvas();
+
+
 function renderCanvas() {
 ctx.clearRect(0, 0, canvas.width, canvas.height);
 for (let y = 0; y < gridSize; y++) {
@@ -124,12 +124,11 @@ if (hoveredPixel) {
     ctx.fillStyle = "rgba(0, 0, 0, 0.1)";
     ctx.fillRect(hoveredPixel.x * pixelSize, hoveredPixel.y * pixelSize, pixelSize, pixelSize); 
 }
-drawGrid();
+if (showGrid) {
+    drawGrid();
 }
-canvas.addEventListener("mouseleave", function() { 
-    hoveredPixel = null;
-    renderCanvas();
-});
+}
+
 function getDrawingBounds() {
    let minX = gridSize;
    let minY = gridSize;
@@ -170,41 +169,46 @@ gridSizeSelect.addEventListener("change", function(){
     }
 }); 
 
-canvas.addEventListener("mousedown", function(event){
-    if (selectedTool === "fill") {
-        drawPixel(event);
+function drawPixel(event) {
+
+    const pixel = getPixelFromMouse(event);
+
+    if (!pixel) {
         return;
     }
-    saveState();
-    isDrawing = true;
-    drawPixel(event);
-});
-function drawPixel(event) {
-const rect = canvas.getBoundingClientRect();
-const mouseX = (event.clientX - rect.left) / zoom;
-const mouseY = (event.clientY - rect.top) / zoom;
-     const pixelX = Math.floor (mouseX / pixelSize);
-     const pixelY = Math.floor (mouseY / pixelSize);
-        if (pixelX >= 0 && pixelX < gridSize && pixelY >= 0 && pixelY < gridSize) {
-        if (selectedTool === "fill") {saveState(); fillArea(pixelX, pixelY); return;}
-        if (selectedTool === "pencil") {pixels[pixelY][pixelX] = selectedColor;}
-        if (selectedTool === "eraser") {pixels[pixelY][pixelX] = null;}
-        if (selectedTool === "picker") {
-            const pickedColor = pixels[pixelY][pixelX];
-            if (pickedColor !== null) { 
-                selectedColor = pickedColor;
-                selectedTool = "pencil";
-            }
-            return;
-        
+
+    const pixelX = pixel.x;
+    const pixelY = pixel.y;
+
+    if (selectedTool === "fill") {
+        saveState();
+        fillArea(pixelX, pixelY);
+        return;
+    }
+
+    if (selectedTool === "pencil") {
+        pixels[pixelY][pixelX] = selectedColor;
+    }
+
+    if (selectedTool === "eraser") {
+        pixels[pixelY][pixelX] = null;
+    }
+
+    if (selectedTool === "picker") {
+
+        const pickedColor = pixels[pixelY][pixelX];
+
+        if (pickedColor !== null) {
+            selectedColor = pickedColor;
+            selectedTool = "pencil";
         }
-            renderCanvas();
-     }
+
+        return;
+    }
+
+    renderCanvas();
 }
 canvas.addEventListener("mouseup", function(event) {
-    isDrawing = false;
-});
-window.addEventListener("mouseup", function() {
     isDrawing = false;
 });
 function changeGridSize(newSize) {
@@ -306,3 +310,64 @@ clearCanvasButton.addEventListener("click", function() {
     }
 });
 updateZoom();
+function getPixelFromMouse(event) {
+    const rect = canvas.getBoundingClientRect();
+    const mouseX = (event.clientX - rect.left) / zoom;
+    const mouseY = (event.clientY - rect.top) / zoom;
+    const pixelX = Math.floor(mouseX / pixelSize);
+    const pixelY = Math.floor(mouseY / pixelSize);
+    if (
+        pixelX < 0 ||
+        pixelX >= gridSize ||
+        pixelY < 0 ||
+        pixelY >= gridSize
+    ) {
+        return null;
+    }
+    return { x: pixelX, y: pixelY };
+}
+canvas.addEventListener("pointerdown", function(event) {
+    if (selectedTool === "fill") {
+        drawPixel(event);
+        return;
+    }
+    saveState();
+    isDrawing = true;
+    canvas.setPointerCapture(event.pointerId);
+    drawPixel(event);
+});
+canvas.addEventListener("pointermove", function(event) {
+    const pixel = getPixelFromMouse(event);
+
+    if (pixel) {
+        hoveredPixel = pixel;
+    } else {
+        hoveredPixel = null;
+    }
+    if (isDrawing) {
+        drawPixel(event);
+    } else {
+        renderCanvas();
+    }
+});
+canvas.addEventListener("pointerup", function(event) {
+    isDrawing = false;
+
+    if (canvas.hasPointerCapture(event.pointerId)) {
+        canvas.releasePointerCapture(event.pointerId);
+    }
+});
+canvas.addEventListener("pointercancel", function(event) {
+    isDrawing = false;
+    if (canvas.hasPointerCapture(event.pointerId)) {
+        canvas.releasePointerCapture(event.pointerId);
+    }
+});
+canvas.addEventListener("pointerleave", function() {
+
+    if (!isDrawing) {
+        hoveredPixel = null;
+        renderCanvas();
+    }
+
+});

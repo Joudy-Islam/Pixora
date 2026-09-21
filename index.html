@@ -5,6 +5,7 @@
         <link rel="stylesheet" href="styles.css">
         <script src="canvas.js" defer></script>
     </head>
+    <body>
     <select id = "gridSize">
         <option value="8">8 x 8</option>
         <option value="16">16 x 16</option>
@@ -13,20 +14,26 @@
 
     </select>
     <button id = "undoButton">Undo</button>
-    <button id = "redoButton">redo</button>
+    <button id = "redoButton">Redo</button>
     <button id = "fillTool">Fill</button>
+    <button id = "clearCanvas">Clear Canvas</button>
     <div class = "zoom-controls">
         <button id = "zoomOut">-</button>
         <span id = "zoomLevel">100%</span>
         <button id = "zoomIn">+</button>
     </div>
+    <button id = "colorPickerTool">Color Picker</button>
     <button id = "pencilTool">Pencil</button>
     <button id = "eraserTool">Eraser</button>
+    <button id ="gridToggle">Hide Grid</button>
 <main class="studio">
 <section class="workspace">
-    <div class="canvas-container"></div>
+    <div class="canvas-container">
+        <div class="canvas-zoom-surface">
         <canvas id="pixelCanvas"></canvas>
+        </div>
     </div>
 </section>
 </main>
+</body>
 </html>
