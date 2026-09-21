@@ -422,7 +422,7 @@ color-picker-btn:hover {
     display: block;
 }
 
-.canvas-Container {
+.canvas-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -536,4 +536,71 @@ color-picker-btn:hover {
     border-radius: 8px;
 
     cursor: pointer;
+}
+.studio {
+    flex:1;
+    min-width: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 35px;
+}
+
+#pixelCanvas {
+    display: block;
+    width :350px;
+    height:350px;
+    background-color: #FFF1D6;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+
+    border: 3px solid #806052;
+    border-radius: 4px;
+
+    box-shadow: 0 0 0 4px #211B1E
+    0 8px 20px rgba(0, 0, 0, 0.35);
+}
+main{
+    display: flex;
+    align-items: stretch;
+    gap : 20px;
+    width:98%;
+    margin:0 auto;
+}
+
+.left-panel{
+    width: 320px;
+    min-width:  320px;
+}
+
+.studio{
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+}
+
+.canvas-Container{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    padding: 25px;
+    background-color: #1A171B;
+    border: 1px solid #5A3E38;
+    border-radius: 18px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35),
+    0 0 20px rgba(181, 111, 75, 0.12);
+}
+
+#pixelCanvas{
+    display: block;
+    width: 350px;
+    height: 350px;
+    background-color: #FFF1D6;
+    border: 3px solid #806052;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    box-shadow: 0 0 0 4px #211B1E, 0 8px 20px rgba(0, 0, 0, .4);
 }

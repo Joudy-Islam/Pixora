@@ -247,4 +247,4 @@ function hslToHex(h, s, l) {
         .join("");
 }
 
-setSelectedColor("#FFF1D6");
+setSelectedColor("black");
