@@ -172,3 +172,16 @@ const color = oldPixels[y][x];
     renderCanvas();
     return true;
 }
+const tools = ["pencil", "eraser", "fill", "picker"];
+
+tools.forEach(tool => {
+    const button = document.getElementById(tool);
+
+    button.addEventListener("click", () => {
+        tools.forEach(otherTool => {
+            document.getElementById(otherTool).classList.remove("active");
+        });
+
+        button.classList.add("active");
+    });
+});

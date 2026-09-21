@@ -188,82 +188,36 @@ button {
     width: 100%;
     margin: 15px 0;
 }
-
-#pencil {
-    width: 48%;
-    min-height: 80px;
-    background-color: #211B1E;
-    border: 1px solid #5A3E38;
-    border-radius: 12px;
-    color: #FFE8C7;
-    font-family: "VT323";
-    font-size: 18px;
-    display: inline-flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    vertical-align: top;
-    transition: 0.15s ease;
+.tools-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
 }
 
-#eraser {
-    width: 48%;
-    min-height: 80px;
-    background-color: #211B1E;
-    border: 1px solid #5A3E38;
-    border-radius: 12px;
-    color: #FFE8C7;
-    font-family: "VT323";
-    font-size: 18px;
-    display: inline-flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    vertical-align: top;
-    margin-left: 3%;
-    transition: 0.15s ease;
-}
-
-#fill {
-    width: 48%;
-    min-height: 80px;
-    background-color: #211B1E;
-    border: 1px solid #5A3E38;
-    border-radius: 12px;
-    color: #FFE8C7;
-    font-family: "VT323";
-    font-size: 18px;
-    display: inline-flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    vertical-align: top;
-    margin-top: 10px;
-    transition: 0.15s ease;
-}
-
+#pencil,
+#eraser,
+#fill,
 #picker {
-    width: 48%;
+    width: 95%;
     min-height: 80px;
+    box-sizing: border-box;
     background-color: #211B1E;
     border: 1px solid #5A3E38;
     border-radius: 12px;
     color: #FFE8C7;
     font-family: "VT323";
     font-size: 18px;
-    display: inline-flex;
+    display:flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 6px;
-    vertical-align: top;
-    margin-left: 3%;
-    margin-top: 10px;
+    cursor: pointer;
     transition: 0.15s ease;
+    margin: 7px;
 }
+
 
 #pencil:hover,
 #eraser:hover,
@@ -274,6 +228,14 @@ button {
     transform: translateY(-2px);
 }
 
+#pencil.active,
+#eraser.active,
+#fill.active,
+#picker.active {
+    background-color: #FF8235;
+    border-color: #B56F4B;
+    box-shadow: 0 0 10px rgba(181, 111, 75, 0.5);
+}
 .left-panel label[for="gridSize"] {
     display: block;
     color: #D8B39A;
@@ -351,10 +313,11 @@ button {
     padding: 0;
 
 }
-.color-picker-btn{
-    width:42px;
-    height:42px;
-    flex-shrink:0;
+
+.color-picker-btn {
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -364,15 +327,92 @@ button {
     cursor: pointer;
     margin: 0;
 }
+
 .color-picker-btn img {
-    width:22px;
-    height:22p;
+    width: 22px;
+    height: 22p;
     object-fit: contain;
 }
-color-picker-btn:hover{
+
+color-picker-btn:hover {
     background-color: #2B2225;
     border-color: #B56F4B;
 }
+
+.color-pallete {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 7px;
+    margin-bottom: 14px;
+}
+
+.color-swatch {
+    width: 29px;
+    aspect-ratio: 1 / 1;
+    padding: 0;
+    border: 1px solid rgba(255, 232, 199, 0.2);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: transform 0.12s ease, border-color 0.12s ease;
+}
+
+.color-swatch:hover {
+    transform: scale(1.08);
+    border-color: #FFE8C7;
+}
+
+.color-swatch.selected {
+    border: 2px solid #FFE8C7;
+    box-shadow: 0 0 0 2px #ff7a21;
+}
+
+.color-spectrum {
+    width: 100%;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    margin-top: 3px;
+}
+
+#hueSlider {
+    width: 100%;
+    height: 15px;
+    appearance: none;
+    -webkit-appearance: none;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    background: linear-gradient(to right,
+            #f00 0%, #ffff00 17%,
+            #00ff00 33%,
+            #00ffff 50%,
+            #0000ff 67%,
+            #ff00ff 83%,
+            #ff0000 100%);
+}
+
+#hueSlider::-webkit-slider-thumb {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: #FFE8C7;
+    border: 2px solid #2A2021;
+    box-shadow: 0 0 0 1px #FFE8C7;
+    cursor: pointer;
+}
+
+#hueSlider::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: #FFE8C7;
+    border: 2px solid #2A2021;
+    box-shadow: 0 0 0 1px #FFE8C7;
+}
+
 #pixelCanvas {
     image-rendering: pixelated;
     image-rendering: crisp-edges;
