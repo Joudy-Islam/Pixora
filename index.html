@@ -8,16 +8,13 @@
     <title>Pixora</title>
     <link rel="stylesheet" href="style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Bona+Nova:ital,wght@0,400;0,700;1,400&family=Press+Start+2P&display=swap"
-        rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Bona+Nova:ital,wght@0,400;0,700;1,400&family=Press+Start+2P&family=VT323&display=swap"
-        rel="stylesheet">
-
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Bona+Nova:ital,wght@0,400;0,700;1,400&family=Press+Start+2P&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Bona+Nova:ital,wght@0,400;0,700;1,400&family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+    <script src="canvas.js" defer></script>
+    
 
 </head>
 
@@ -45,10 +42,7 @@
                         <img class="img" src="Photos/export.svg" alt="export logo">
                         Export
                     </button>
-                    <button class="theme-btn" id="light-dark-mood-btn" type="button" aria-label="Switch to light mood"
-                        aria-pressed="false">
-                        <img src="Photos/light.svg" alt="sun" id="theme-icon" />
-                    </button>
+                    
                 </div>
             </div>
         </header>
@@ -164,32 +158,34 @@
                 </div>
             </section>
             <!--Animation-->
-            <section id="animation">
-                <h1> Animation</h1>
-                <section id="preview">
-                    <div id="preview_box">
-                        <img id="preview_image" src="" alt="Animation preview">
-                        <p id="empty_message">No frame selected</p>
+              <section id="animation">
+            <h1> Animation</h1>
+           <section id="preview">
+           <div id="preview_box">
+            <img id="preview_image" src="" alt="Animation preview">
+            <p id="empty_message">No frame selected</p>
+        
+        </div>
+           </section>
 
-                    </div>
-                </section>
-
-                <section id="controls">
-                    <button id="play"> Play</button>
-                    <button id="pause">Pause</button>
-                </section>
-
-                <section id="frames">
-                    <div id="header">
-                        <h3> Frames</h3>
-                        <input id="frameinput" type="file" multiple style="display:none">
-                        <button id="add">Add</button>
-                    </div>
-                    <div id="container"></div>
-                </section>
+            <section id="controls">
+                <button id="play"> Play</button>
+                <button id="pause">Pause</button>
+                <button id="delete">Delete</button>
             </section>
-        </main>
-
+            <div id="fpscounter">FPS:0</div>
+            <section id="frames">
+                <div id="header">
+                    <h3 > Frames</h3>
+                    <input id="frameinput" type="file"  multiple style="display:none" >
+                    <button id="add">Add</button>
+                </div>
+                <div id="container"></div>
+            </section>
+            </section>
+            <script src="Animation.js"></script>
+        </main> 
+   
     </div>
     <script src="canvas.js" defer></script>
     <script src="Animation.js"></script>
