@@ -16,20 +16,9 @@ let currentFrame = 0;
 let FPS=10 ;
 let lastFrameTime = 0;
 
-<<<<<<< HEAD
-=======
 
 
 
-
- 
-
-
-
-
-
-
->>>>>>> main
 function playLoop(timestamp){
     if (!running) return;
     if (timestamp - lastFrameTime >= 1000 / FPS ){
@@ -51,13 +40,13 @@ function fpsLoop(){
 
     if (now - lastTime >= 1000){
           fps = framecount;
-<<<<<<< HEAD
+
           framecount=0;
           lastTime=now;
-=======
+
           framecount = 0;
           lastTime = now;
->>>>>>> main
+
           document.getElementById("fpscounter").textContent= `FPS ${fps}`;
           
     }    
@@ -68,11 +57,11 @@ function fpsLoop(){
 
 // delete button
 deleteBtn.addEventListener("click",function(){
-<<<<<<< HEAD
+
          if(frames.length>0){
-=======
+
          if(frames.length > 0){
->>>>>>> main
+
             frames.splice(currentFrame,1)
              
             if(frames.length>0){
@@ -86,8 +75,8 @@ deleteBtn.addEventListener("click",function(){
             }
             displayFrames();
          }
-<<<<<<< HEAD
-});
+
+}});
 
 // play button 
 playBtn.addEventListener("click", function(){
@@ -105,8 +94,8 @@ pauseBtn.addEventListener("click", function(){
 //Add button
 addFrameBtn.addEventListener("click", function(){
        frameInput.click();
-=======
->>>>>>> main
+
+
 });
 
 // play button 
@@ -137,7 +126,7 @@ frameInput.addEventListener("change", function(){
 
 });
 function displayFrames(){
-<<<<<<< HEAD
+
 framesContainer.innerHTML=" ";
 frames.forEach(function(imageURL,index){
 let frame= document.createElement("div");
@@ -161,7 +150,6 @@ function showFrame(index){
     });
     document.querySelectorAll(".frame")[index].classList.add("selected");
 }
-=======
     framesContainer.innerHTML = "";
     frames.forEach(function(imageURL, index){
         let frame = document.createElement("div");
@@ -175,7 +163,7 @@ function showFrame(index){
         });
         framesContainer.appendChild(frame);
     });
-}
+
 
 
 function showFrame(index){
@@ -372,4 +360,4 @@ exportBtn.addEventListener("click", function () {
 
     }, "image/png");
 });
->>>>>>> main
+
